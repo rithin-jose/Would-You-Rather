@@ -1,49 +1,35 @@
-import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { handleInitialData } from '../actions';
-import Dashboard from './Dashboard';
-import Leaderboard from './Leaderboard';
-import Login from './Login';
-import Nav from './Nav';
-import NewQuestion from './NewQuestion';
-import NotFound from './NotFound';
-import QuestionPage from './QuestionPage';
-import ProtectedRoute from '../utils/ProtectedRoute';
+import React,{Component,Fragment} from 'react';
+import Nav from './Nav'
+import Login from './Login'
+import Dashboard from './Dashboard'
+import Answering from './Answering'
+import AddQuestion from './AddQuestion'
+import {handleUserData} from '../actions/shared'
+import {handleQuestionData} from '../actions/shared'
+import {connect} from 'react-redux'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 
 class App extends Component {
-  componentDidMount() {
-    this.props.dispatch(handleInitialData())
+  componentDidMount(){
+    this.props.dispatch(handleUserData())
+    this.props.dispatch(handleQuestionData())
   }
-  render() {
-    const { loggedIn } = this.props;
 
+  render(){
     return (
       <Router>
         <Fragment>
-          <div className='container'>
-            <Nav />
-              <div>
-                <Switch>
-                  <ProtectedRoute path='/' exact component={Dashboard} loggedIn={loggedIn} />
-                  <ProtectedRoute path='/leaderboard' exact component={Leaderboard} loggedIn={loggedIn} />
-                  <ProtectedRoute path='/add' exact component={NewQuestion} loggedIn={loggedIn} />
-                  <ProtectedRoute path='/questions/:id' exact component={QuestionPage} loggedIn={loggedIn} />
-                  <Route path='/login' exact component={Login} />
-                  <Route component={NotFound} />
-                </Switch>
-              </div>
+          <Nav/>
+          <div>
+            <Route path="/" exact component={Login}/>
+            <Route path="/add"  component={AddQuestion}/>
+            <Route path="/question" exact component={Dashboard}/>
+            <Route path="/question/:id"  component={Answering}/>
           </div>
         </Fragment>
       </Router>
-    );
+    )
   }
 }
 
-function mapStateToProps({ authedUser }) {
-  return {
-    loggedIn: authedUser !== null,
-  };
-}
-
-export default connect(mapStateToProps)(App);
+export default connect()(App);
