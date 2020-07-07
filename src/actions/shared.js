@@ -9,11 +9,11 @@ export function handleInitialData(){
     return (dispatch) => {
         return (
             _getUsers()
-            .then(({users}) => {
+            .then((users) => {
                 dispatch(receiveUsers(users))
             }),
             _getQuestions()
-            .then(({questions}) => {
+            .then((questions) => {
                 dispatch(receiveQuestions(questions))
             })
         )
