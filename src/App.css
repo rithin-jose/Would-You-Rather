@@ -34,8 +34,36 @@ select{
 }
 
 .avatarIcon{
-  height:40px;
-  width: 40px;
+  height:80px;
+  width: 80px;
   border-radius: 50%;
 }
-  
+.image{
+  border-right: 2px solid #e0dede;
+  margin-top: 25px;
+
+}
+
+.question-card{
+display: grid;
+}
+
+.tab{
+  background-color: #f5f5f5 !important;
+  border: none;
+}
+
+.bold{
+  font-weight: 600;
+}
+
+.progress{
+  width: auto;
+  padding-left: 15px;
+  padding-right: 15px
+}
+
+.answer-card{
+  display: grid;
+  margin:10px;
+}
