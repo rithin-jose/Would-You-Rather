@@ -38,6 +38,7 @@ select{
   width: 80px;
   border-radius: 50%;
 }
+
 .image{
   border-right: 2px solid #e0dede;
   margin-top: 25px;
@@ -66,4 +67,18 @@ display: grid;
 .answer-card{
   display: grid;
   margin:10px;
+}
+
+.car.green{
+  background-color: #9c4ead ;
+}
+
+.avatarIcon2{
+  height:30px;
+  width: 30px;
+  border-radius: 50%;
+}
+
+.logout{
+  padding-right: 10px;
 }

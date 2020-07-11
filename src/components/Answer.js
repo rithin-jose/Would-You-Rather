@@ -1,11 +1,12 @@
 import React,{Component} from 'react'
 import {connect} from 'react-redux'
 import {handleAddAnswer} from '../actions/questions'
+import {Redirect} from 'react-router-dom'
 
 class Answer extends Component{
 
     state={
-        option:''
+        option:'optionOne'
     }
 
     handleOptionOne = () => {
@@ -29,13 +30,18 @@ class Answer extends Component{
         dispatch(handleAddAnswer(qid,answer))
     }
 
-    render(){        
+    render(){  
+        if(this.props.autheduser === null){
+            return(
+                <Redirect to="/"></Redirect>
+            )
+        }       
         return(
             <div>
                 <span className="bold">Would You Rather?</span><br/>
                     <form onSubmit={this.handleSubmit}>
                         <label>
-                            <input name="answer" type="radio" onChange={this.handleOptionOne}/>
+                            <input name="answer" type="radio"  checked onChange={this.handleOptionOne}/>
                             <span>{this.props.optionOne.text}</span>
                         </label>
                         <span className="bold"> or </span>

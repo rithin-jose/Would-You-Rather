@@ -2,10 +2,15 @@ import React,{Component} from 'react'
 import {connect} from 'react-redux'
 import Answer from './Answer'
 import Answered from './Answered'
+import {Redirect} from 'react-router-dom'
 
 class Poll extends Component{
     render(){
-        console.log(this.props.user);
+        if(this.props.autheduser === null){
+            return(
+                <Redirect to="/"></Redirect>
+            )
+        } 
         
         return(
             <div className="row">

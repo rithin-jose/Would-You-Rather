@@ -1,6 +1,7 @@
 import React,{Component} from 'react'
 import {connect} from 'react-redux'
 import {handleAddQuestion} from '../actions/questions'
+import {Redirect} from 'react-router-dom'
 
 class Newquestion extends Component{
     state={
@@ -31,11 +32,18 @@ class Newquestion extends Component{
         dispatch(handleAddQuestion(optionOneText,optionTwoText))        
         this.setState(() => ({
             optionOneText:'',
-            optionTwoText:''
+            optionTwoText:'',
+            toDashboard:true
         }))
     }
 
-    render(){        
+    render(){
+        if(this.state.toDashboard || this.props.autheduser === null){
+            return(
+                <Redirect to="/"></Redirect>
+            )
+        } 
+        
         return(
             <div className="row">
             <div className="col s1 m3"></div>
@@ -74,4 +82,10 @@ class Newquestion extends Component{
     }
 }
 
-export default connect()(Newquestion)
+function mapStateToProp({autheduser}){
+    return{
+        autheduser,
+    }
+}
+
+export default connect(mapStateToProp)(Newquestion)

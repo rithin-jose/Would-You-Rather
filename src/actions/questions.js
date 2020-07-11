@@ -11,10 +11,11 @@ export function receiveQuestions(questions){
     }
 }
 
-export function addQuestions(question){
+export function addQuestions(question,users){
     return{
         type: ADD_QUESTIONS,
         question,
+        users
     }
 }
 
@@ -22,7 +23,7 @@ export function addQuestions(question){
 
 export function handleAddQuestion(optionOneText,optionTwoText){
     return (dispatch,getState) => {
-        const {autheduser} =  getState()
+        const {autheduser,users} =  getState()
 
         return _saveQuestion({
             optionOneText,
@@ -30,6 +31,7 @@ export function handleAddQuestion(optionOneText,optionTwoText){
             author: autheduser,
         })
         .then((question)=>dispatch(addQuestions(question)))
+        .then((users)=>dispatch(handleInitialData()))
     }
 }
 

@@ -6,7 +6,8 @@ import Login from './Login'
 import Dashboard from './Dashboard'
 import Newquestion from './Newquestion'
 import Poll from './Poll'
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Route,Switch} from 'react-router-dom'
+import Leaderboard from './Leaderboard'
 
 class App extends Component{
   componentDidMount(){
@@ -21,11 +22,20 @@ class App extends Component{
         <Nav/>
         <div>
           {this.props.autheduser === null 
-            ?<Route path="/" exact component={Login}/>
-            :<Route path="/" exact component={Dashboard}/>
+            ?
+
+              <Route path="/"  component={Login}/>
+
+            :
+              <Switch>
+                <Route path="/" exact component={Dashboard}/>
+                <Route path="/add" exact component={Newquestion}/>
+                <Route path="/leaderboard" exact component={Leaderboard}/>
+                <Route path="/question/:id" component={Poll}/>
+              </Switch>
+              
           }
-          <Route path="/add" exact component={Newquestion}/>
-          <Route path="/question/:id" component={Poll}/>
+          
         </div>
       </Fragment>
     </Router>
